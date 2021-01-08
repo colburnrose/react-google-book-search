@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
 import Header from "../src/components/Header/Header";
+import PrintType from "./components/PrintType/PrintType";
+import BookType from "./components/BookType/BookType";
 
 class App extends Component {
   state = {
@@ -11,7 +13,6 @@ class App extends Component {
   };
 
   searchBooks = () => {
-    console.log("searching...");
     let url = `https://www.googleapis.com/books/v1/volumes?q=${this.state.query}&printType=${this.state.printType}`;
     if (this.state.filter !== "") {
       url += `&filter=${this.state.filter}`;
@@ -58,27 +59,12 @@ class App extends Component {
 
           <p>
             <label htmlFor="printType">Print Type:</label>
-            <select
-              id="printType"
-              value={this.state.printType}
-              onChange={(e) => this.handleChange("printType", e.target.value)}
-            >
-              <option value="all">All</option>
-              <option value="books">Books</option>
-              <option value="magazines">Magazines</option>
-            </select>
+            <PrintType
+              id={this.state.printType}
+              handleChange={this.handleChange}
+            />
             <label htmlFor="filter">Book Type:</label>
-            <select
-              id="filter"
-              value={this.state.filter}
-              onChange={(e) => this.handleChange("filter", e.target.value)}
-            >
-              <option value="">Select ...</option>
-              <option value="ebooks">E-Books</option>
-              <option value="free-ebooks">Free Ebooks</option>
-              <option value="paid-ebooks">Paid Ebooks</option>
-              <option value="partial">Partial</option>
-            </select>
+            <BookType id={this.state.filter} handleChange={this.handleChange} />
           </p>
         </form>
         <p>You searched for "{this.state.query}"</p>
