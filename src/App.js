@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "../src/components/Header/Header";
 import PrintType from "./components/PrintType/PrintType";
 import BookType from "./components/BookType/BookType";
+import SearchBar from "./components/SearchBar/SearchBar";
 
 class App extends Component {
   state = {
@@ -47,14 +48,7 @@ class App extends Component {
         <Header />
         <form onSubmit={this.handleSubmit}>
           <p>
-            <input
-              type="text"
-              value={this.state.query}
-              placeholder="Book Search"
-              aria-label="Book Search"
-              onChange={(e) => this.handleChange("query", e.target.value)}
-            />
-            <input type="submit" value="Submit" />
+            <SearchBar id={this.state.query} handleChange={this.handleChange} />
           </p>
 
           <p>
